@@ -1,5 +1,8 @@
 const express = require("express");
 const logger = require("./middleware/logger");
+
+const posts = require("./Posts");
+
 require("dotenv").config();
 
 const app = express();
@@ -15,4 +18,10 @@ app.get("/", (req, res) =>
   })
 );
 
-app.listen(3000, () => console.log(`Running at http://localhost:${PORT}`));
+app.get("/api/posts", (req, res) => {
+  res.status(200).json(posts);
+});
+
+app.listen(PORT, () =>
+  console.log(`Server running at http://localhost:${PORT}`)
+);
